@@ -324,6 +324,9 @@ open class YAxisRenderer: NSObject, AxisRenderer
                 align = .left
                 point = CGPoint(x: viewPortHandler.contentLeft + xOffset,
                                 y: position.y + yOffset - labelLineHeight)
+             case .topCenter:
+                align = .center
+                point = CGPoint(x: viewPortHandler.contentCenter.x, y: position.y - yOffset)
             }
 
             context.drawText(label,
