@@ -42,8 +42,8 @@ open class XAxisRenderer: NSObject, AxisRenderer
             let p1 = transformer.valueForTouchPoint(CGPoint(x: viewPortHandler.contentLeft, y: viewPortHandler.contentTop))
             let p2 = transformer.valueForTouchPoint(CGPoint(x: viewPortHandler.contentRight, y: viewPortHandler.contentTop))
 
-            min = inverted ? Double(p2.x) : Double(p1.x)
-            max = inverted ? Double(p1.x) : Double(p2.x)
+            min = inverted ? Double(p2.x) : (Double(p1.x) + 0.01)
+            max = inverted ? Double(p1.x) : (Double(p2.x) + + 0.01)
         }
         
         computeAxisValues(min: min, max: max)
@@ -477,6 +477,10 @@ open class XAxisRenderer: NSObject, AxisRenderer
             align = .right
             point = CGPoint(x: position.x - xOffset,
                             y: viewPortHandler.contentBottom - labelLineHeight - yOffset)
+        case .topCenter:
+            point = CGPoint(x: position.x - xOffset,
+                            y: viewPortHandler.contentBottom + yOffset)
+            align = .center
         }
 
         context.drawText(label,
